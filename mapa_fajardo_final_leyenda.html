@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d9fa26a98f863d8402aa22a0c45c88d7 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_d9fa26a98f863d8402aa22a0c45c88d7" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d9fa26a98f863d8402aa22a0c45c88d7 = L.map(
+                "map_d9fa26a98f863d8402aa22a0c45c88d7",
+                {
+                    center: [7.1193, -73.1227],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_813675da4adb3fe47796f7d5c6cab64b = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_813675da4adb3fe47796f7d5c6cab64b.addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+    var color_map_116d4c67f5b2f865482f377f3b01d9e9 = {};
+
+    
+    color_map_116d4c67f5b2f865482f377f3b01d9e9.color = d3.scale.threshold()
+              .domain([7.738095238095238, 7.832923646965524, 7.92775205583581, 8.022580464706095, 8.11740887357638, 8.212237282446667, 8.307065691316952, 8.401894100187238, 8.496722509057523, 8.59155091792781, 8.686379326798095, 8.781207735668382, 8.876036144538666, 8.970864553408953, 9.065692962279238, 9.160521371149525, 9.25534978001981, 9.350178188890096, 9.445006597760381, 9.539835006630668, 9.634663415500953, 9.72949182437124, 9.824320233241524, 9.91914864211181, 10.013977050982096, 10.10880545985238, 10.203633868722667, 10.298462277592954, 10.393290686463239, 10.488119095333523, 10.58294750420381, 10.677775913074097, 10.772604321944382, 10.867432730814667, 10.962261139684953, 11.057089548555238, 11.151917957425525, 11.24674636629581, 11.341574775166096, 11.436403184036381, 11.531231592906668, 11.626060001776953, 11.72088841064724, 11.815716819517524, 11.91054522838781, 12.005373637258096, 12.100202046128382, 12.195030454998667, 12.289858863868954, 12.384687272739239, 12.479515681609524, 12.574344090479812, 12.669172499350097, 12.764000908220382, 12.858829317090667, 12.953657725960953, 13.048486134831238, 13.143314543701525, 13.23814295257181, 13.332971361442096, 13.427799770312381, 13.522628179182668, 13.617456588052953, 13.71228499692324, 13.807113405793526, 13.901941814663811, 13.996770223534096, 14.091598632404382, 14.18642704127467, 14.281255450144954, 14.376083859015239, 14.470912267885524, 14.565740676755812, 14.660569085626097, 14.755397494496382, 14.850225903366667, 14.945054312236953, 15.03988272110724, 15.134711129977525, 15.22953953884781, 15.324367947718097, 15.419196356588383, 15.514024765458668, 15.608853174328953, 15.70368158319924, 15.798509992069526, 15.893338400939811, 15.988166809810096, 16.08299521868038, 16.17782362755067, 16.272652036420954, 16.36748044529124, 16.462308854161527, 16.557137263031812, 16.651965671902097, 16.746794080772382, 16.841622489642667, 16.936450898512955, 17.03127930738324, 17.126107716253525, 17.22093612512381, 17.3157645339941, 17.410592942864383, 17.505421351734668, 17.600249760604953, 17.695078169475238, 17.789906578345526, 17.88473498721581, 17.979563396086096, 18.074391804956385, 18.16922021382667, 18.264048622696954, 18.35887703156724, 18.453705440437524, 18.548533849307812, 18.643362258178097, 18.738190667048382, 18.833019075918667, 18.927847484788956, 19.02267589365924, 19.117504302529525, 19.21233271139981, 19.307161120270095, 19.401989529140383, 19.49681793801067, 19.591646346880953, 19.68647475575124, 19.781303164621526, 19.87613157349181, 19.970959982362096, 20.06578839123238, 20.16061680010267, 20.255445208972954, 20.35027361784324, 20.445102026713528, 20.539930435583813, 20.634758844454097, 20.729587253324382, 20.824415662194667, 20.919244071064956, 21.01407247993524, 21.108900888805525, 21.20372929767581, 21.2985577065461, 21.393386115416384, 21.48821452428667, 21.583042933156957, 21.677871342027238, 21.772699750897527, 21.86752815976781, 21.962356568638096, 22.057184977508385, 22.15201338637867, 22.246841795248955, 22.34167020411924, 22.436498612989528, 22.531327021859813, 22.626155430730098, 22.720983839600382, 22.815812248470667, 22.910640657340956, 23.00546906621124, 23.100297475081526, 23.195125883951814, 23.289954292822095, 23.384782701692384, 23.47961111056267, 23.574439519432953, 23.669267928303242, 23.764096337173523, 23.85892474604381, 23.953753154914097, 24.04858156378438, 24.14340997265467, 24.238238381524955, 24.33306679039524, 24.427895199265524, 24.522723608135813, 24.617552017006098, 24.712380425876383, 24.807208834746667, 24.902037243616952, 24.99686565248724, 25.091694061357526, 25.186522470227814, 25.281350879098095, 25.376179287968384, 25.47100769683867, 25.565836105708954, 25.660664514579242, 25.755492923449523, 25.85032133231981, 25.945149741190097, 26.039978150060385, 26.13480655893067, 26.22963496780095, 26.32446337667124, 26.419291785541525, 26.514120194411813, 26.608948603282098, 26.703777012152383, 26.798605421022668, 26.893433829892956, 26.98826223876324, 27.08309064763353, 27.17791905650381, 27.272747465374096, 27.367575874244384, 27.46240428311467, 27.557232691984957, 27.65206110085524, 27.746889509725527, 27.841717918595812, 27.936546327466097, 28.031374736336385, 28.126203145206667, 28.221031554076955, 28.31585996294724, 28.41068837181753, 28.505516780687813, 28.600345189558098, 28.695173598428383, 28.790002007298668, 28.884830416168956, 28.979658825039238, 29.074487233909526, 29.16931564277981, 29.2641440516501, 29.358972460520384, 29.45380086939067, 29.548629278260954, 29.64345768713124, 29.738286096001527, 29.833114504871812, 29.927942913742097, 30.022771322612382, 30.11759973148267, 30.212428140352955, 30.307256549223244, 30.402084958093525, 30.49691336696381, 30.591741775834098, 30.686570184704383, 30.78139859357467, 30.876227002444953, 30.97105541131524, 31.065883820185526, 31.160712229055815, 31.2555406379261, 31.35036904679638, 31.44519745566667, 31.540025864536954, 31.634854273407242, 31.729682682277527, 31.824511091147812, 31.919339500018097, 32.01416790888839, 32.108996317758674, 32.20382472662896, 32.298653135499244, 32.39348154436953, 32.48830995323981, 32.5831383621101, 32.67796677098039, 32.77279517985067, 32.86762358872096, 32.962451997591245, 33.05728040646153, 33.152108815331815, 33.2469372242021, 33.341765633072384, 33.43659404194267, 33.53142245081296, 33.626250859683246, 33.72107926855353, 33.815907677423816, 33.9107360862941, 34.005564495164386, 34.10039290403467, 34.195221312904955, 34.29004972177524, 34.38487813064553, 34.47970653951582, 34.5745349483861, 34.66936335725639, 34.76419176612667, 34.85902017499696, 34.95384858386724, 35.04867699273753, 35.14350540160781, 35.2383338104781, 35.33316221934839, 35.42799062821867, 35.52281903708896, 35.61764744595924, 35.71247585482953, 35.80730426369981, 35.902132672570104, 35.99696108144038, 36.091789490310674, 36.18661789918096, 36.281446308051244, 36.37627471692153, 36.471103125791814, 36.5659315346621, 36.66075994353238, 36.755588352402675, 36.85041676127296, 36.945245170143245, 37.04007357901353, 37.134901987883815, 37.2297303967541, 37.324558805624385, 37.41938721449467, 37.514215623364954, 37.609044032235246, 37.70387244110553, 37.798700849975816, 37.8935292588461, 37.988357667716386, 38.08318607658667, 38.178014485456956, 38.27284289432725, 38.367671303197525, 38.46249971206782, 38.5573281209381, 38.65215652980839, 38.74698493867867, 38.84181334754896, 38.93664175641924, 39.03147016528953, 39.12629857415982, 39.2211269830301, 39.31595539190039, 39.41078380077067, 39.50561220964096, 39.60044061851124, 39.695269027381535, 39.79009743625181, 39.884925845122105, 39.97975425399239, 40.074582662862674, 40.16941107173296, 40.264239480603244, 40.35906788947353, 40.45389629834382, 40.548724707214106, 40.64355311608439, 40.738381524954676, 40.83320993382496, 40.928038342695245, 41.02286675156553, 41.117695160435815, 41.2125235693061, 41.30735197817639, 41.40218038704668, 41.49700879591696, 41.59183720478725, 41.68666561365753, 41.78149402252782, 41.8763224313981, 41.971150840268386, 42.06597924913867, 42.16080765800896, 42.25563606687925, 42.35046447574953, 42.44529288461982, 42.5401212934901, 42.634949702360394, 42.72977811123068, 42.82460652010096, 42.91943492897124, 43.014263337841534, 43.10909174671182, 43.203920155582104, 43.29874856445239, 43.39357697332267, 43.488405382192965, 43.58323379106325, 43.678062199933535, 43.77289060880381, 43.8677190176741, 43.96254742654439, 44.057375835414675, 44.15220424428496, 44.247032653155244, 44.34186106202554, 44.43668947089582, 44.531517879766106, 44.626346288636384, 44.72117469750667, 44.81600310637696, 44.910831515247246, 45.00565992411753, 45.100488332987815, 45.19531674185811, 45.29014515072839, 45.38497355959868, 45.47980196846896, 45.57463037733924, 45.66945878620953, 45.76428719507982, 45.8591156039501, 45.953944012820386, 46.04877242169068, 46.14360083056096, 46.23842923943125, 46.33325764830153, 46.428086057171825, 46.5229144660421, 46.61774287491239, 46.71257128378267, 46.80739969265296, 46.90222810152325, 46.997056510393534, 47.09188491926382, 47.186713328134104, 47.281541737004396, 47.37637014587468, 47.47119855474496, 47.56602696361524, 47.66085537248553, 47.75568378135582, 47.850512190226105, 47.94534059909639, 48.040169007966675, 48.13499741683696, 48.22982582570725, 48.32465423457754, 48.419482643447814, 48.5143110523181, 48.60913946118839, 48.703967870058676, 48.79879627892896, 48.893624687799246, 48.98845309666953, 49.08328150553982, 49.17810991441011, 49.27293832328039, 49.36776673215067, 49.46259514102096, 49.55742354989125, 49.65225195876153, 49.74708036763182, 49.8419087765021, 49.936737185372394, 50.03156559424268, 50.126394003112964, 50.22122241198324, 50.31605082085353, 50.41087922972382, 50.5057076385941, 50.60053604746439, 50.69536445633467, 50.790192865204965, 50.88502127407525, 50.979849682945535, 51.07467809181582, 51.169506500686104, 51.26433490955639, 51.359163318426674, 51.45399172729696, 51.548820136167244, 51.643648545037536, 51.73847695390782, 51.833305362778106, 51.92813377164839, 52.02296218051868, 52.11779058938896, 52.212618998259245, 52.30744740712953, 52.402275815999815, 52.49710422487011, 52.59193263374039, 52.68676104261068, 52.78158945148096, 52.87641786035125, 52.97124626922154, 53.066074678091816, 53.1609030869621, 53.255731495832386, 53.35055990470268, 53.44538831357296, 53.54021672244325, 53.63504513131353, 53.729873540183824, 53.82470194905411, 53.919530357924394, 54.01435876679467, 54.10918717566496, 54.20401558453525, 54.298843993405534, 54.39367240227582, 54.4885008111461, 54.583329220016395, 54.67815762888668, 54.772986037756965, 54.86781444662725, 54.96264285549753, 55.05747126436782])
+              .range(['#ffff00ff', '#ffff00ff', '#ffff00ff', '#fffe00ff', '#fffe00ff', '#fffe00ff', '#fffd00ff', '#fffd00ff', '#fffd00ff', '#fffc00ff', '#fffc00ff', '#fffc00ff', '#fffb00ff', '#fffb00ff', '#fffa00ff', '#fffa00ff', '#fffa00ff', '#fff900ff', '#fff900ff', '#fff900ff', '#fff800ff', '#fff800ff', '#fff800ff', '#fff700ff', '#fff700ff', '#fff600ff', '#fff600ff', '#fff600ff', '#fff500ff', '#fff500ff', '#fff500ff', '#fff400ff', '#fff400ff', '#fff400ff', '#fff300ff', '#fff300ff', '#fff200ff', '#fff200ff', '#fff200ff', '#fff100ff', '#fff100ff', '#fff100ff', '#fff000ff', '#fff000ff', '#fff000ff', '#ffef00ff', '#ffef00ff', '#ffee00ff', '#ffee00ff', '#ffee00ff', '#ffed00ff', '#ffed00ff', '#ffed00ff', '#ffec00ff', '#ffec00ff', '#ffec00ff', '#ffeb00ff', '#ffeb00ff', '#ffea00ff', '#ffea00ff', '#ffea00ff', '#ffe900ff', '#ffe900ff', '#ffe900ff', '#ffe800ff', '#ffe800ff', '#ffe800ff', '#ffe700ff', '#ffe700ff', '#ffe700ff', '#ffe600ff', '#ffe600ff', '#ffe500ff', '#ffe500ff', '#ffe500ff', '#ffe400ff', '#ffe400ff', '#ffe400ff', '#ffe300ff', '#ffe300ff', '#ffe300ff', '#ffe200ff', '#ffe200ff', '#ffe100ff', '#ffe100ff', '#ffe100ff', '#ffe000ff', '#ffe000ff', '#ffe000ff', '#ffdf00ff', '#ffdf00ff', '#ffdf00ff', '#ffde00ff', '#ffde00ff', '#ffdd00ff', '#ffdd00ff', '#ffdd00ff', '#ffdc00ff', '#ffdc00ff', '#ffdc00ff', '#ffdb00ff', '#ffdb00ff', '#ffdb00ff', '#ffda00ff', '#ffda00ff', '#ffd900ff', '#ffd900ff', '#ffd900ff', '#ffd800ff', '#ffd800ff', '#ffd800ff', '#ffd700ff', '#ffd700ff', '#ffd700ff', '#ffd600ff', '#ffd600ff', '#ffd500ff', '#ffd500ff', '#ffd500ff', '#ffd400ff', '#ffd400ff', '#ffd400ff', '#ffd300ff', '#ffd300ff', '#ffd300ff', '#ffd200ff', '#ffd200ff', '#ffd200ff', '#ffd100ff', '#ffd100ff', '#ffd000ff', '#ffd000ff', '#ffd000ff', '#ffcf00ff', '#ffcf00ff', '#ffcf00ff', '#ffce00ff', '#ffce00ff', '#ffce00ff', '#ffcd00ff', '#ffcd00ff', '#ffcc00ff', '#ffcc00ff', '#ffcc00ff', '#ffcb00ff', '#ffcb00ff', '#ffcb00ff', '#ffca00ff', '#ffca00ff', '#ffca00ff', '#ffc900ff', '#ffc900ff', '#ffc800ff', '#ffc800ff', '#ffc800ff', '#ffc700ff', '#ffc700ff', '#ffc700ff', '#ffc600ff', '#ffc600ff', '#ffc600ff', '#ffc500ff', '#ffc500ff', '#ffc400ff', '#ffc400ff', '#ffc400ff', '#ffc300ff', '#ffc300ff', '#ffc300ff', '#ffc200ff', '#ffc200ff', '#ffc200ff', '#ffc100ff', '#ffc100ff', '#ffc000ff', '#ffc000ff', '#ffc000ff', '#ffbf00ff', '#ffbf00ff', '#ffbf00ff', '#ffbe00ff', '#ffbe00ff', '#ffbe00ff', '#ffbd00ff', '#ffbd00ff', '#ffbd00ff', '#ffbc00ff', '#ffbc00ff', '#ffbb00ff', '#ffbb00ff', '#ffbb00ff', '#ffba00ff', '#ffba00ff', '#ffba00ff', '#ffb900ff', '#ffb900ff', '#ffb900ff', '#ffb800ff', '#ffb800ff', '#ffb700ff', '#ffb700ff', '#ffb700ff', '#ffb600ff', '#ffb600ff', '#ffb600ff', '#ffb500ff', '#ffb500ff', '#ffb500ff', '#ffb400ff', '#ffb400ff', '#ffb300ff', '#ffb300ff', '#ffb300ff', '#ffb200ff', '#ffb200ff', '#ffb200ff', '#ffb100ff', '#ffb100ff', '#ffb100ff', '#ffb000ff', '#ffb000ff', '#ffaf00ff', '#ffaf00ff', '#ffaf00ff', '#ffae00ff', '#ffae00ff', '#ffae00ff', '#ffad00ff', '#ffad00ff', '#ffad00ff', '#ffac00ff', '#ffac00ff', '#ffab00ff', '#ffab00ff', '#ffab00ff', '#ffaa00ff', '#ffaa00ff', '#ffaa00ff', '#ffa900ff', '#ffa900ff', '#ffa900ff', '#ffa800ff', '#ffa800ff', '#ffa800ff', '#ffa700ff', '#ffa700ff', '#ffa600ff', '#ffa600ff', '#ffa600ff', '#ffa500ff', '#ffa500ff', '#ffa400ff', '#ffa300ff', '#ffa300ff', '#ffa200ff', '#ffa100ff', '#ffa100ff', '#ffa000ff', '#ffa000ff', '#ff9f00ff', '#ff9e00ff', '#ff9e00ff', '#ff9d00ff', '#ff9c00ff', '#ff9c00ff', '#ff9b00ff', '#ff9a00ff', '#ff9a00ff', '#ff9900ff', '#ff9800ff', '#ff9800ff', '#ff9700ff', '#ff9600ff', '#ff9600ff', '#ff9500ff', '#ff9400ff', '#ff9400ff', '#ff9300ff', '#ff9200ff', '#ff9200ff', '#ff9100ff', '#ff9000ff', '#ff9000ff', '#ff8f00ff', '#ff8e00ff', '#ff8e00ff', '#ff8d00ff', '#ff8c00ff', '#ff8c00ff', '#ff8b00ff', '#ff8a00ff', '#ff8a00ff', '#ff8900ff', '#ff8800ff', '#ff8800ff', '#ff8700ff', '#ff8600ff', '#ff8600ff', '#ff8500ff', '#ff8400ff', '#ff8400ff', '#ff8300ff', '#ff8200ff', '#ff8200ff', '#ff8100ff', '#ff8000ff', '#ff8000ff', '#ff7f00ff', '#ff7e00ff', '#ff7e00ff', '#ff7d00ff', '#ff7c00ff', '#ff7c00ff', '#ff7b00ff', '#ff7a00ff', '#ff7a00ff', '#ff7900ff', '#ff7800ff', '#ff7800ff', '#ff7700ff', '#ff7600ff', '#ff7600ff', '#ff7500ff', '#ff7400ff', '#ff7400ff', '#ff7300ff', '#ff7200ff', '#ff7200ff', '#ff7100ff', '#ff7000ff', '#ff7000ff', '#ff6f00ff', '#ff6e00ff', '#ff6e00ff', '#ff6d00ff', '#ff6c00ff', '#ff6c00ff', '#ff6b00ff', '#ff6a00ff', '#ff6a00ff', '#ff6900ff', '#ff6800ff', '#ff6800ff', '#ff6700ff', '#ff6600ff', '#ff6600ff', '#ff6500ff', '#ff6400ff', '#ff6400ff', '#ff6300ff', '#ff6200ff', '#ff6200ff', '#ff6100ff', '#ff6000ff', '#ff6000ff', '#ff5f00ff', '#ff5e00ff', '#ff5e00ff', '#ff5d00ff', '#ff5c00ff', '#ff5c00ff', '#ff5b00ff', '#ff5a00ff', '#ff5a00ff', '#ff5900ff', '#ff5800ff', '#ff5800ff', '#ff5700ff', '#ff5600ff', '#ff5600ff', '#ff5500ff', '#ff5400ff', '#ff5400ff', '#ff5300ff', '#ff5200ff', '#ff5200ff', '#ff5100ff', '#ff5000ff', '#ff5000ff', '#ff4f00ff', '#ff4f00ff', '#ff4e00ff', '#ff4d00ff', '#ff4d00ff', '#ff4c00ff', '#ff4b00ff', '#ff4b00ff', '#ff4a00ff', '#ff4900ff', '#ff4900ff', '#ff4800ff', '#ff4700ff', '#ff4700ff', '#ff4600ff', '#ff4500ff', '#ff4500ff', '#ff4400ff', '#ff4300ff', '#ff4300ff', '#ff4200ff', '#ff4100ff', '#ff4100ff', '#ff4000ff', '#ff3f00ff', '#ff3f00ff', '#ff3e00ff', '#ff3d00ff', '#ff3d00ff', '#ff3c00ff', '#ff3b00ff', '#ff3b00ff', '#ff3a00ff', '#ff3900ff', '#ff3900ff', '#ff3800ff', '#ff3700ff', '#ff3700ff', '#ff3600ff', '#ff3500ff', '#ff3500ff', '#ff3400ff', '#ff3300ff', '#ff3300ff', '#ff3200ff', '#ff3100ff', '#ff3100ff', '#ff3000ff', '#ff2f00ff', '#ff2f00ff', '#ff2e00ff', '#ff2d00ff', '#ff2d00ff', '#ff2c00ff', '#ff2b00ff', '#ff2b00ff', '#ff2a00ff', '#ff2900ff', '#ff2900ff', '#ff2800ff', '#ff2700ff', '#ff2700ff', '#ff2600ff', '#ff2500ff', '#ff2500ff', '#ff2400ff', '#ff2300ff', '#ff2300ff', '#ff2200ff', '#ff2100ff', '#ff2100ff', '#ff2000ff', '#ff1f00ff', '#ff1f00ff', '#ff1e00ff', '#ff1d00ff', '#ff1d00ff', '#ff1c00ff', '#ff1b00ff', '#ff1b00ff', '#ff1a00ff', '#ff1900ff', '#ff1900ff', '#ff1800ff', '#ff1700ff', '#ff1700ff', '#ff1600ff', '#ff1500ff', '#ff1500ff', '#ff1400ff', '#ff1300ff', '#ff1300ff', '#ff1200ff', '#ff1100ff', '#ff1100ff', '#ff1000ff', '#ff0f00ff', '#ff0f00ff', '#ff0e00ff', '#ff0d00ff', '#ff0d00ff', '#ff0c00ff', '#ff0b00ff', '#ff0b00ff', '#ff0a00ff', '#ff0900ff', '#ff0900ff', '#ff0800ff', '#ff0700ff', '#ff0700ff', '#ff0600ff', '#ff0500ff', '#ff0500ff', '#ff0400ff', '#ff0300ff', '#ff0300ff', '#ff0200ff', '#ff0100ff', '#ff0100ff', '#ff0000ff', '#ff0000ff']);
+    
+
+    color_map_116d4c67f5b2f865482f377f3b01d9e9.x = d3.scale.linear()
+              .domain([7.738095238095238, 55.05747126436782])
+              .range([0, 450 - 50]);
+
+    color_map_116d4c67f5b2f865482f377f3b01d9e9.legend = L.control({position: 'topright'});
+    color_map_116d4c67f5b2f865482f377f3b01d9e9.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_116d4c67f5b2f865482f377f3b01d9e9.legend.addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+
+    color_map_116d4c67f5b2f865482f377f3b01d9e9.xAxis = d3.svg.axis()
+        .scale(color_map_116d4c67f5b2f865482f377f3b01d9e9.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([7.738095238095238, 31.397783251231527, 55.05747126436782]);
+
+    color_map_116d4c67f5b2f865482f377f3b01d9e9.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_116d4c67f5b2f865482f377f3b01d9e9.g = color_map_116d4c67f5b2f865482f377f3b01d9e9.svg.append("g")
+        .attr("class", "key")
+        .attr("fill", "black")
+        .attr("transform", "translate(25,16)");
+
+    color_map_116d4c67f5b2f865482f377f3b01d9e9.g.selectAll("rect")
+        .data(color_map_116d4c67f5b2f865482f377f3b01d9e9.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_116d4c67f5b2f865482f377f3b01d9e9.x(color_map_116d4c67f5b2f865482f377f3b01d9e9.color.domain()[i - 1]) : color_map_116d4c67f5b2f865482f377f3b01d9e9.x.range()[0],
+            x1: i < color_map_116d4c67f5b2f865482f377f3b01d9e9.color.domain().length ? color_map_116d4c67f5b2f865482f377f3b01d9e9.x(color_map_116d4c67f5b2f865482f377f3b01d9e9.color.domain()[i]) : color_map_116d4c67f5b2f865482f377f3b01d9e9.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_116d4c67f5b2f865482f377f3b01d9e9.g.call(color_map_116d4c67f5b2f865482f377f3b01d9e9.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .attr("fill", "black")
+        .text("Intensidad de Votaci\u00f3n Sergio Fajardo (%)");
+    
+            var heat_map_c8e323fbf9b6b23ad48d429a31c18795 = L.heatLayer(
+                [[7.098279499999999, -73.11894269999999, 55.05747126436782], [7.09098, -73.11827029999999, 45.58032282859339], [7.1036994, -73.09720130000001, 45.03239740820735], [7.1062053, -73.12382649999999, 45.00073410659228], [7.0925273, -73.1079973, 44.90772385509227], [7.1049884, -73.1238068, 44.29623730838145], [7.102674299999999, -73.1390864, 43.09102815979044], [7.116195599999999, -73.1329956, 42.93256130790191], [7.119349, -73.1227416, 42.85714285714285], [7.0999034, -73.1041971, 42.802344166222696], [7.1237461, -73.1198115, 42.50857796416317], [7.1273481, -73.1070697, 42.28634850166482], [7.1287648, -73.12728860000001, 41.92672998643148], [7.119349, -73.1227416, 41.59628378378378], [7.082718, -73.1132191, 41.300251256281406], [7.1352101, -73.12659300000001, 41.243408270885375], [7.077550899999999, -73.0892666, 41.19697850087158], [7.1250228, -73.1080575, 40.25748947759346], [7.1273346, -73.1175938, 39.66709900562041], [7.099482300000001, -73.1142565, 39.50900163666121], [7.085428299999999, -73.1186434, 39.3833114131229], [7.1062053, -73.12382649999999, 39.369419642857146], [7.140759800000001, -73.1275522, 39.25233644859813], [7.1300231, -73.1196867, 39.06611188164586], [7.119349, -73.1227416, 39.04109589041096], [7.120923899999999, -73.1228473, 38.962750029943706], [7.1062053, -73.12382649999999, 38.69346733668342], [7.1402291, -73.11560910000001, 38.36399801093983], [7.119349, -73.1227416, 37.54147812971343], [7.077550899999999, -73.0892666, 36.9950389794472], [7.1180395, -73.12465569999999, 36.89293598233996], [7.129492699999999, -73.1131681, 36.81919416886009], [7.0739981, -73.0910543, 36.775818639798494], [7.100363, -73.13097280000001, 36.75560890037855], [7.085428299999999, -73.1186434, 35.74267867283199], [7.119349, -73.1227416, 35.68087665374849], [7.1062053, -73.12382649999999, 35.60842433697348], [7.123894099999999, -73.1123794, 35.44510385756677], [7.20832, -73.11393, 35.35369774919614], [7.119349, -73.1227416, 34.95696400625978], [7.0841499, -73.12273669999999, 34.7453954496208], [7.1086513, -73.115955, 34.66035634743875], [7.0934484, -73.1077597, 34.2065707537041], [7.1086513, -73.115955, 34.193548387096776], [7.148932299999999, -73.1351602, 34.06303076052085], [7.131338899999999, -73.1031694, 34.009360374414975], [7.119349, -73.1227416, 33.70601775731667], [7.119349, -73.1227416, 33.4427714253368], [7.1128947, -73.137012, 33.11865246470151], [7.097747399999999, -73.1100045, 32.80736357659435], [7.093233000000001, -73.1422931, 32.70328102710414], [7.1076371, -73.1363556, 31.49448345035105], [7.1263748, -73.1193627, 31.00314575323313], [7.1514894, -73.13253329999999, 30.970982142857142], [7.117411499999999, -73.1133277, 30.83311927391044], [7.085428299999999, -73.1186434, 30.59033989266548], [7.1360484, -73.1287518, 30.335588274306936], [7.0739981, -73.0910543, 29.78723404255319], [7.1215563, -73.1307011, 29.672924784508208], [7.1167105, -73.12873929999999, 29.480599466228703], [7.119349, -73.1227416, 28.01353013530135], [7.1522305, -73.1353991, 27.005487326887906], [7.1402291, -73.11560910000001, 26.839398734177216], [7.180609299999999, -73.142692, 26.31578947368421], [7.149987299999999, -73.1320101, 25.496102055279945], [7.116154499999999, -73.1298978, 24.92524562152926], [7.1091403, -73.11457659999999, 23.469667856162506], [7.119349, -73.1227416, 23.2288037166086], [7.153245, -73.1267684, 22.629310344827587], [7.1530833, -73.1337914, 20.382165605095544], [7.180609299999999, -73.142692, 17.673716012084594], [7.096570499999999, -73.0975857, 13.10517529215359], [7.1224466, -73.12433829999999, 12.445414847161572], [7.120962199999999, -73.12512269999999, 7.738095238095238]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 12,
+  "gradient": {
+  0.2: "yellow",
+  0.5: "orange",
+  1: "red",
+},
+}
+            );
+        
+    
+            heat_map_c8e323fbf9b6b23ad48d429a31c18795.addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+            var circle_marker_74fd3b88cf04142e113ec52145e86161 = L.circleMarker(
+                [7.098279499999999, -73.11894269999999],
+                {"bubblingMouseEvents": true, "color": "#ff0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_80f68bf87789b130f68d7da5e35bcdc1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6ffbb0a4fcec93751b35a8891e68ebd5 = $(`<div id="html_6ffbb0a4fcec93751b35a8891e68ebd5" style="width: 100.0%; height: 100.0%;"><b>GIMNASIO SUPERIOR EMPRESARIAL</b><br>Porcentaje: 55.06%</div>`)[0];
+                popup_80f68bf87789b130f68d7da5e35bcdc1.setContent(html_6ffbb0a4fcec93751b35a8891e68ebd5);
+            
+        
+
+        circle_marker_74fd3b88cf04142e113ec52145e86161.bindPopup(popup_80f68bf87789b130f68d7da5e35bcdc1)
+        ;
+
+        
+    
+    
+            var circle_marker_6c744ae668b649a967cd20ba26821a26 = L.circleMarker(
+                [7.09098, -73.11827029999999],
+                {"bubblingMouseEvents": true, "color": "#ff4200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff4200ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_43fc39b3b0b111de4e4b0a8e14f974f1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1ed370e5c06d42412d0f361144f29891 = $(`<div id="html_1ed370e5c06d42412d0f361144f29891" style="width: 100.0%; height: 100.0%;"><b>JARDIN INFANTIL CASITA DE CHOC</b><br>Porcentaje: 45.58%</div>`)[0];
+                popup_43fc39b3b0b111de4e4b0a8e14f974f1.setContent(html_1ed370e5c06d42412d0f361144f29891);
+            
+        
+
+        circle_marker_6c744ae668b649a967cd20ba26821a26.bindPopup(popup_43fc39b3b0b111de4e4b0a8e14f974f1)
+        ;
+
+        
+    
+    
+            var circle_marker_f2879a7136e276dd48428dade61d9bde = L.circleMarker(
+                [7.1036994, -73.09720130000001],
+                {"bubblingMouseEvents": true, "color": "#ff4600ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff4600ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_c0bd60dfc9200ab79a12ad5933a30d54 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_34570d95bcc447b85cb1e6b3293fe122 = $(`<div id="html_34570d95bcc447b85cb1e6b3293fe122" style="width: 100.0%; height: 100.0%;"><b>COL NUESTRA SEÑORA DEL ROSARIO</b><br>Porcentaje: 45.03%</div>`)[0];
+                popup_c0bd60dfc9200ab79a12ad5933a30d54.setContent(html_34570d95bcc447b85cb1e6b3293fe122);
+            
+        
+
+        circle_marker_f2879a7136e276dd48428dade61d9bde.bindPopup(popup_c0bd60dfc9200ab79a12ad5933a30d54)
+        ;
+
+        
+    
+    
+            var circle_marker_7ca09db6817b200d056a7a4904fef67c = L.circleMarker(
+                [7.1062053, -73.12382649999999],
+                {"bubblingMouseEvents": true, "color": "#ff4600ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff4600ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_50940268a727dcfe79c55240b6d32fed = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_42fa6dc20d279876acfc54af29379436 = $(`<div id="html_42fa6dc20d279876acfc54af29379436" style="width: 100.0%; height: 100.0%;"><b>IE NUESTRA SEÑORA DEL PILAR SE</b><br>Porcentaje: 45.00%</div>`)[0];
+                popup_50940268a727dcfe79c55240b6d32fed.setContent(html_42fa6dc20d279876acfc54af29379436);
+            
+        
+
+        circle_marker_7ca09db6817b200d056a7a4904fef67c.bindPopup(popup_50940268a727dcfe79c55240b6d32fed)
+        ;
+
+        
+    
+    
+            var circle_marker_52006800c088d66ba5494371a4d225bc = L.circleMarker(
+                [7.0925273, -73.1079973],
+                {"bubblingMouseEvents": true, "color": "#ff4700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff4700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_dcdbc27b69ef1dc9b0da40cf0d2fdf04 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_317aafb85f62dab085f663dacfd6e85a = $(`<div id="html_317aafb85f62dab085f663dacfd6e85a" style="width: 100.0%; height: 100.0%;"><b>SALON COMUNAL DIAMANTE I</b><br>Porcentaje: 44.91%</div>`)[0];
+                popup_dcdbc27b69ef1dc9b0da40cf0d2fdf04.setContent(html_317aafb85f62dab085f663dacfd6e85a);
+            
+        
+
+        circle_marker_52006800c088d66ba5494371a4d225bc.bindPopup(popup_dcdbc27b69ef1dc9b0da40cf0d2fdf04)
+        ;
+
+        
+    
+    
+            var circle_marker_150dbd3586550112b0d053f7c4c487fc = L.circleMarker(
+                [7.1049884, -73.1238068],
+                {"bubblingMouseEvents": true, "color": "#ff4b00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff4b00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_c6a3106f4dce596671ce6977ce3bd99a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_39e90e0ce6a7801d3527f423561c723f = $(`<div id="html_39e90e0ce6a7801d3527f423561c723f" style="width: 100.0%; height: 100.0%;"><b>UNIDADES TECNOLOGICAS  DE SANT</b><br>Porcentaje: 44.30%</div>`)[0];
+                popup_c6a3106f4dce596671ce6977ce3bd99a.setContent(html_39e90e0ce6a7801d3527f423561c723f);
+            
+        
+
+        circle_marker_150dbd3586550112b0d053f7c4c487fc.bindPopup(popup_c6a3106f4dce596671ce6977ce3bd99a)
+        ;
+
+        
+    
+    
+            var circle_marker_d554363c754110b8f4dcab527e3cc1c1 = L.circleMarker(
+                [7.102674299999999, -73.1390864],
+                {"bubblingMouseEvents": true, "color": "#ff5300ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff5300ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_5f31b4d537950b37e8d60827228cee3f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_06cc68cad5c786f3d1fe3db7e000c243 = $(`<div id="html_06cc68cad5c786f3d1fe3db7e000c243" style="width: 100.0%; height: 100.0%;"><b>IE CAMPO HERMOSO</b><br>Porcentaje: 43.09%</div>`)[0];
+                popup_5f31b4d537950b37e8d60827228cee3f.setContent(html_06cc68cad5c786f3d1fe3db7e000c243);
+            
+        
+
+        circle_marker_d554363c754110b8f4dcab527e3cc1c1.bindPopup(popup_5f31b4d537950b37e8d60827228cee3f)
+        ;
+
+        
+    
+    
+            var circle_marker_a501d34bec181ca750b7d85073d80637 = L.circleMarker(
+                [7.116195599999999, -73.1329956],
+                {"bubblingMouseEvents": true, "color": "#ff5400ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff5400ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_34f2f495b79b28f916a3c9833def3df5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3b1b311a0eb67da8db8b990d0c4b2d6a = $(`<div id="html_3b1b311a0eb67da8db8b990d0c4b2d6a" style="width: 100.0%; height: 100.0%;"><b>IE CAMACHO CARREÑO</b><br>Porcentaje: 42.93%</div>`)[0];
+                popup_34f2f495b79b28f916a3c9833def3df5.setContent(html_3b1b311a0eb67da8db8b990d0c4b2d6a);
+            
+        
+
+        circle_marker_a501d34bec181ca750b7d85073d80637.bindPopup(popup_34f2f495b79b28f916a3c9833def3df5)
+        ;
+
+        
+    
+    
+            var circle_marker_19ad45e6559e4c977933e1067bcdbccc = L.circleMarker(
+                [7.119349, -73.1227416],
+                {"bubblingMouseEvents": true, "color": "#ff5500ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff5500ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_fc8ed364be9ab58976106f37891f17e8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1f168b258b96c46d91c473ace49542b9 = $(`<div id="html_1f168b258b96c46d91c473ace49542b9" style="width: 100.0%; height: 100.0%;"><b>INST NAL PENITEN Y CARCELARIO</b><br>Porcentaje: 42.86%</div>`)[0];
+                popup_fc8ed364be9ab58976106f37891f17e8.setContent(html_1f168b258b96c46d91c473ace49542b9);
+            
+        
+
+        circle_marker_19ad45e6559e4c977933e1067bcdbccc.bindPopup(popup_fc8ed364be9ab58976106f37891f17e8)
+        ;
+
+        
+    
+    
+            var circle_marker_6a2955b6bdee302c62b202600af7d1ea = L.circleMarker(
+                [7.0999034, -73.1041971],
+                {"bubblingMouseEvents": true, "color": "#ff5500ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff5500ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_0638b9a9a2f796592a54729d3a10b09a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a0e95d6e13683f8de6895946c8f4ff4b = $(`<div id="html_a0e95d6e13683f8de6895946c8f4ff4b" style="width: 100.0%; height: 100.0%;"><b>INST CALDAS</b><br>Porcentaje: 42.80%</div>`)[0];
+                popup_0638b9a9a2f796592a54729d3a10b09a.setContent(html_a0e95d6e13683f8de6895946c8f4ff4b);
+            
+        
+
+        circle_marker_6a2955b6bdee302c62b202600af7d1ea.bindPopup(popup_0638b9a9a2f796592a54729d3a10b09a)
+        ;
+
+        
+    
+    
+            var circle_marker_2015554f413bf7370cadfc20b0bfd08b = L.circleMarker(
+                [7.1237461, -73.1198115],
+                {"bubblingMouseEvents": true, "color": "#ff5700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff5700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_2f473095caf6d87e1449f771386b4e9a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bfc7b3de4b9bbfe9b8fe0f6d9a746d23 = $(`<div id="html_bfc7b3de4b9bbfe9b8fe0f6d9a746d23" style="width: 100.0%; height: 100.0%;"><b>COL PSICOPEDAG CARL ROGERS</b><br>Porcentaje: 42.51%</div>`)[0];
+                popup_2f473095caf6d87e1449f771386b4e9a.setContent(html_bfc7b3de4b9bbfe9b8fe0f6d9a746d23);
+            
+        
+
+        circle_marker_2015554f413bf7370cadfc20b0bfd08b.bindPopup(popup_2f473095caf6d87e1449f771386b4e9a)
+        ;
+
+        
+    
+    
+            var circle_marker_035539833cc48f65152088a1a0393ad8 = L.circleMarker(
+                [7.1273481, -73.1070697],
+                {"bubblingMouseEvents": true, "color": "#ff5900ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff5900ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_2149e68ea625e76bb401768123f116c7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_32a739fa5cac735cc2ecd7aeb1d23b98 = $(`<div id="html_32a739fa5cac735cc2ecd7aeb1d23b98" style="width: 100.0%; height: 100.0%;"><b>CENT EDUC CAJASAN TEJADOS</b><br>Porcentaje: 42.29%</div>`)[0];
+                popup_2149e68ea625e76bb401768123f116c7.setContent(html_32a739fa5cac735cc2ecd7aeb1d23b98);
+            
+        
+
+        circle_marker_035539833cc48f65152088a1a0393ad8.bindPopup(popup_2149e68ea625e76bb401768123f116c7)
+        ;
+
+        
+    
+    
+            var circle_marker_5819d3ccb246aae232fda6fa73b570b2 = L.circleMarker(
+                [7.1287648, -73.12728860000001],
+                {"bubblingMouseEvents": true, "color": "#ff5b00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff5b00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_9333f9ec4fd645741683a2a04f7d02c4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5bd366294b892e9ffcaf60518a0acbcf = $(`<div id="html_5bd366294b892e9ffcaf60518a0acbcf" style="width: 100.0%; height: 100.0%;"><b>COL AMERICANO</b><br>Porcentaje: 41.93%</div>`)[0];
+                popup_9333f9ec4fd645741683a2a04f7d02c4.setContent(html_5bd366294b892e9ffcaf60518a0acbcf);
+            
+        
+
+        circle_marker_5819d3ccb246aae232fda6fa73b570b2.bindPopup(popup_9333f9ec4fd645741683a2a04f7d02c4)
+        ;
+
+        
+    
+    
+            var circle_marker_950808408d4de5a0b51a86e5dea08398 = L.circleMarker(
+                [7.119349, -73.1227416],
+                {"bubblingMouseEvents": true, "color": "#ff5e00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff5e00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_2cf378d693fb437fdde97b61cdd07d85 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7e760f0c036bda81da8b6a9290eada4e = $(`<div id="html_7e760f0c036bda81da8b6a9290eada4e" style="width: 100.0%; height: 100.0%;"><b>COOP ESPECIALIZ DE EDUC DE COM</b><br>Porcentaje: 41.60%</div>`)[0];
+                popup_2cf378d693fb437fdde97b61cdd07d85.setContent(html_7e760f0c036bda81da8b6a9290eada4e);
+            
+        
+
+        circle_marker_950808408d4de5a0b51a86e5dea08398.bindPopup(popup_2cf378d693fb437fdde97b61cdd07d85)
+        ;
+
+        
+    
+    
+            var circle_marker_15ce7aca66be7030b5de5565371f4d28 = L.circleMarker(
+                [7.082718, -73.1132191],
+                {"bubblingMouseEvents": true, "color": "#ff6000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_0b4e3a701263d2aa8f7a22a2a0e5a296 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1bf2130dbc3eaac5b8699833e35a9417 = $(`<div id="html_1bf2130dbc3eaac5b8699833e35a9417" style="width: 100.0%; height: 100.0%;"><b>IE PROVENZA</b><br>Porcentaje: 41.30%</div>`)[0];
+                popup_0b4e3a701263d2aa8f7a22a2a0e5a296.setContent(html_1bf2130dbc3eaac5b8699833e35a9417);
+            
+        
+
+        circle_marker_15ce7aca66be7030b5de5565371f4d28.bindPopup(popup_0b4e3a701263d2aa8f7a22a2a0e5a296)
+        ;
+
+        
+    
+    
+            var circle_marker_9c45ba7590af6f84178f59d6a9617737 = L.circleMarker(
+                [7.1352101, -73.12659300000001],
+                {"bubblingMouseEvents": true, "color": "#ff6000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_9079930dbc5be14d08b1c3078c83f171 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_10ca6cc12188e069fb871ddf3815c4f3 = $(`<div id="html_10ca6cc12188e069fb871ddf3815c4f3" style="width: 100.0%; height: 100.0%;"><b>IE PILOTO SIMON BOLIVAR</b><br>Porcentaje: 41.24%</div>`)[0];
+                popup_9079930dbc5be14d08b1c3078c83f171.setContent(html_10ca6cc12188e069fb871ddf3815c4f3);
+            
+        
+
+        circle_marker_9c45ba7590af6f84178f59d6a9617737.bindPopup(popup_9079930dbc5be14d08b1c3078c83f171)
+        ;
+
+        
+    
+    
+            var circle_marker_afa90ac5acc52ef6da69fefecafa4c46 = L.circleMarker(
+                [7.077550899999999, -73.0892666],
+                {"bubblingMouseEvents": true, "color": "#ff6100ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6100ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_37dde87e5efdd0842fff2e98cb859165 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_99cad1fe4bcf6ed21e2177b9654c22a8 = $(`<div id="html_99cad1fe4bcf6ed21e2177b9654c22a8" style="width: 100.0%; height: 100.0%;"><b>COL FRANCISCO DE PAULA S/DER S</b><br>Porcentaje: 41.20%</div>`)[0];
+                popup_37dde87e5efdd0842fff2e98cb859165.setContent(html_99cad1fe4bcf6ed21e2177b9654c22a8);
+            
+        
+
+        circle_marker_afa90ac5acc52ef6da69fefecafa4c46.bindPopup(popup_37dde87e5efdd0842fff2e98cb859165)
+        ;
+
+        
+    
+    
+            var circle_marker_06fc84d95cb359eba0b294fa37e2c300 = L.circleMarker(
+                [7.1250228, -73.1080575],
+                {"bubblingMouseEvents": true, "color": "#ff6700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_377bd815f427e03fa99b8528c03c9901 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3f046b7abb018684be1bc588470d636e = $(`<div id="html_3f046b7abb018684be1bc588470d636e" style="width: 100.0%; height: 100.0%;"><b>COL DE LAS AMERICAS</b><br>Porcentaje: 40.26%</div>`)[0];
+                popup_377bd815f427e03fa99b8528c03c9901.setContent(html_3f046b7abb018684be1bc588470d636e);
+            
+        
+
+        circle_marker_06fc84d95cb359eba0b294fa37e2c300.bindPopup(popup_377bd815f427e03fa99b8528c03c9901)
+        ;
+
+        
+    
+    
+            var circle_marker_43208683f98f32f1302bfb1b5da304d2 = L.circleMarker(
+                [7.1273346, -73.1175938],
+                {"bubblingMouseEvents": true, "color": "#ff6b00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6b00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_2070e7f25ae7626ccbc0a63fa731b585 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_adda703e4be32bedb4d89856f2233412 = $(`<div id="html_adda703e4be32bedb4d89856f2233412" style="width: 100.0%; height: 100.0%;"><b>ESC NORMAL SUPERIOR SEDE C</b><br>Porcentaje: 39.67%</div>`)[0];
+                popup_2070e7f25ae7626ccbc0a63fa731b585.setContent(html_adda703e4be32bedb4d89856f2233412);
+            
+        
+
+        circle_marker_43208683f98f32f1302bfb1b5da304d2.bindPopup(popup_2070e7f25ae7626ccbc0a63fa731b585)
+        ;
+
+        
+    
+    
+            var circle_marker_84b4bd455b9ff063170ee673f5ff32b3 = L.circleMarker(
+                [7.099482300000001, -73.1142565],
+                {"bubblingMouseEvents": true, "color": "#ff6c00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6c00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_89d41fdccfbaba712f0b81b82504e7bd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0fa15c930da56c1fb05a2b818094443a = $(`<div id="html_0fa15c930da56c1fb05a2b818094443a" style="width: 100.0%; height: 100.0%;"><b>INST SAN JOSÉ DE LA SALLE</b><br>Porcentaje: 39.51%</div>`)[0];
+                popup_89d41fdccfbaba712f0b81b82504e7bd.setContent(html_0fa15c930da56c1fb05a2b818094443a);
+            
+        
+
+        circle_marker_84b4bd455b9ff063170ee673f5ff32b3.bindPopup(popup_89d41fdccfbaba712f0b81b82504e7bd)
+        ;
+
+        
+    
+    
+            var circle_marker_ff3c539045e25b385a609d3fa6b51cb9 = L.circleMarker(
+                [7.085428299999999, -73.1186434],
+                {"bubblingMouseEvents": true, "color": "#ff6d00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6d00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_6480d7aef7492a6037b0ffb4170eabe3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0d0da646a25b15fd3593cd439ad905db = $(`<div id="html_0d0da646a25b15fd3593cd439ad905db" style="width: 100.0%; height: 100.0%;"><b>IE INEM CUSTODIO GARCIA ROV SD</b><br>Porcentaje: 39.38%</div>`)[0];
+                popup_6480d7aef7492a6037b0ffb4170eabe3.setContent(html_0d0da646a25b15fd3593cd439ad905db);
+            
+        
+
+        circle_marker_ff3c539045e25b385a609d3fa6b51cb9.bindPopup(popup_6480d7aef7492a6037b0ffb4170eabe3)
+        ;
+
+        
+    
+    
+            var circle_marker_eaf1cd52836c40c8635e5e15f237c0ec = L.circleMarker(
+                [7.1062053, -73.12382649999999],
+                {"bubblingMouseEvents": true, "color": "#ff6d00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6d00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_a965bc385d55c4e915ec18d05f7eb3d1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dc1a89309185ec7c067ac33728539c80 = $(`<div id="html_dc1a89309185ec7c067ac33728539c80" style="width: 100.0%; height: 100.0%;"><b>IE NUESTRA SEÑORA DEL PILAR SE</b><br>Porcentaje: 39.37%</div>`)[0];
+                popup_a965bc385d55c4e915ec18d05f7eb3d1.setContent(html_dc1a89309185ec7c067ac33728539c80);
+            
+        
+
+        circle_marker_eaf1cd52836c40c8635e5e15f237c0ec.bindPopup(popup_a965bc385d55c4e915ec18d05f7eb3d1)
+        ;
+
+        
+    
+    
+            var circle_marker_43f69aa6aa47e40e0d36efcef6e396de = L.circleMarker(
+                [7.140759800000001, -73.1275522],
+                {"bubblingMouseEvents": true, "color": "#ff6e00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6e00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_1cb90ceb4a2dce036015e1d0abf56d08 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f013671c48dc7f7c79e1549cf6a03113 = $(`<div id="html_f013671c48dc7f7c79e1549cf6a03113" style="width: 100.0%; height: 100.0%;"><b>COL SANTANDER SEDE C</b><br>Porcentaje: 39.25%</div>`)[0];
+                popup_1cb90ceb4a2dce036015e1d0abf56d08.setContent(html_f013671c48dc7f7c79e1549cf6a03113);
+            
+        
+
+        circle_marker_43f69aa6aa47e40e0d36efcef6e396de.bindPopup(popup_1cb90ceb4a2dce036015e1d0abf56d08)
+        ;
+
+        
+    
+    
+            var circle_marker_a22dba1890c065d72bfaf89d18b2151c = L.circleMarker(
+                [7.1300231, -73.1196867],
+                {"bubblingMouseEvents": true, "color": "#ff6f00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6f00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_69299a7ba989db03e437beb97adb126b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4759e42437ef3361f77d9cd8d77d1381 = $(`<div id="html_4759e42437ef3361f77d9cd8d77d1381" style="width: 100.0%; height: 100.0%;"><b>CORP EDUCATIVA ASED</b><br>Porcentaje: 39.07%</div>`)[0];
+                popup_69299a7ba989db03e437beb97adb126b.setContent(html_4759e42437ef3361f77d9cd8d77d1381);
+            
+        
+
+        circle_marker_a22dba1890c065d72bfaf89d18b2151c.bindPopup(popup_69299a7ba989db03e437beb97adb126b)
+        ;
+
+        
+    
+    
+            var circle_marker_d48bb13bea5b99bbc7a5178f8e7f1dd8 = L.circleMarker(
+                [7.119349, -73.1227416],
+                {"bubblingMouseEvents": true, "color": "#ff7000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_3ef027a1eec38081fa7ba1a3bd5f11ec = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6494131568a6a26ef3be4a74a3577175 = $(`<div id="html_6494131568a6a26ef3be4a74a3577175" style="width: 100.0%; height: 100.0%;"><b>INST NAL PENITEN Y CARCELARIO</b><br>Porcentaje: 39.04%</div>`)[0];
+                popup_3ef027a1eec38081fa7ba1a3bd5f11ec.setContent(html_6494131568a6a26ef3be4a74a3577175);
+            
+        
+
+        circle_marker_d48bb13bea5b99bbc7a5178f8e7f1dd8.bindPopup(popup_3ef027a1eec38081fa7ba1a3bd5f11ec)
+        ;
+
+        
+    
+    
+            var circle_marker_562e7502742b23492bc55e3844fc8b84 = L.circleMarker(
+                [7.120923899999999, -73.1228473],
+                {"bubblingMouseEvents": true, "color": "#ff7000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_24f8ee7fee1ee4b40fc19e9048efe0c2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ea9baea45f1b098d57c49e15dca4403c = $(`<div id="html_ea9baea45f1b098d57c49e15dca4403c" style="width: 100.0%; height: 100.0%;"><b>UNIVERSIDAD AUTONOMA DE BUCARA</b><br>Porcentaje: 38.96%</div>`)[0];
+                popup_24f8ee7fee1ee4b40fc19e9048efe0c2.setContent(html_ea9baea45f1b098d57c49e15dca4403c);
+            
+        
+
+        circle_marker_562e7502742b23492bc55e3844fc8b84.bindPopup(popup_24f8ee7fee1ee4b40fc19e9048efe0c2)
+        ;
+
+        
+    
+    
+            var circle_marker_b08e31d312381fa3e421b13d3fb23c86 = L.circleMarker(
+                [7.1062053, -73.12382649999999],
+                {"bubblingMouseEvents": true, "color": "#ff7200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7200ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_224a57d89ed0cafc927af49abe46f8f2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8bc318c1974a4210fa7571881ec6179b = $(`<div id="html_8bc318c1974a4210fa7571881ec6179b" style="width: 100.0%; height: 100.0%;"><b>IE NUESTRA SEÑORA DEL PILAR SE</b><br>Porcentaje: 38.69%</div>`)[0];
+                popup_224a57d89ed0cafc927af49abe46f8f2.setContent(html_8bc318c1974a4210fa7571881ec6179b);
+            
+        
+
+        circle_marker_b08e31d312381fa3e421b13d3fb23c86.bindPopup(popup_224a57d89ed0cafc927af49abe46f8f2)
+        ;
+
+        
+    
+    
+            var circle_marker_160a8e32ea1688e82c9b1284117bf4bc = L.circleMarker(
+                [7.1402291, -73.11560910000001],
+                {"bubblingMouseEvents": true, "color": "#ff7400ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7400ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_c6b1b4d4b4aa4418ab4894b622f4c882 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_272323c1cec9c139186c9a1ab8ee1952 = $(`<div id="html_272323c1cec9c139186c9a1ab8ee1952" style="width: 100.0%; height: 100.0%;"><b>IE DÁMASO ZAPATA SEDE A</b><br>Porcentaje: 38.36%</div>`)[0];
+                popup_c6b1b4d4b4aa4418ab4894b622f4c882.setContent(html_272323c1cec9c139186c9a1ab8ee1952);
+            
+        
+
+        circle_marker_160a8e32ea1688e82c9b1284117bf4bc.bindPopup(popup_c6b1b4d4b4aa4418ab4894b622f4c882)
+        ;
+
+        
+    
+    
+            var circle_marker_f3f0d486e906edf32a911914f4b65a9f = L.circleMarker(
+                [7.119349, -73.1227416],
+                {"bubblingMouseEvents": true, "color": "#ff7a00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7a00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_2bb2c9c7b8b0f1965cbeb30bbb291100 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b7b481861856a7de385cef18e03853b4 = $(`<div id="html_b7b481861856a7de385cef18e03853b4" style="width: 100.0%; height: 100.0%;"><b>COL SANTANDER SEDE A</b><br>Porcentaje: 37.54%</div>`)[0];
+                popup_2bb2c9c7b8b0f1965cbeb30bbb291100.setContent(html_b7b481861856a7de385cef18e03853b4);
+            
+        
+
+        circle_marker_f3f0d486e906edf32a911914f4b65a9f.bindPopup(popup_2bb2c9c7b8b0f1965cbeb30bbb291100)
+        ;
+
+        
+    
+    
+            var circle_marker_17a78f019defbbe68302f207567c43d1 = L.circleMarker(
+                [7.077550899999999, -73.0892666],
+                {"bubblingMouseEvents": true, "color": "#ff7e00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7e00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_c7cf6cb66bd503adb8eb4d5fd6bf249c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c6a0d11bcb8dbe48f4127e204363439a = $(`<div id="html_c6a0d11bcb8dbe48f4127e204363439a" style="width: 100.0%; height: 100.0%;"><b>COL FRANCISCO DE PAULA S/DER S</b><br>Porcentaje: 37.00%</div>`)[0];
+                popup_c7cf6cb66bd503adb8eb4d5fd6bf249c.setContent(html_c6a0d11bcb8dbe48f4127e204363439a);
+            
+        
+
+        circle_marker_17a78f019defbbe68302f207567c43d1.bindPopup(popup_c7cf6cb66bd503adb8eb4d5fd6bf249c)
+        ;
+
+        
+    
+    
+            var circle_marker_3bc96ecfb2c4c798e8b593b8ce2e8edb = L.circleMarker(
+                [7.1180395, -73.12465569999999],
+                {"bubblingMouseEvents": true, "color": "#ff7f00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_71fa185d747ddbb24eb12dd3a3fba725 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4c0ddc4b0e76b1e5587170f334012c28 = $(`<div id="html_4c0ddc4b0e76b1e5587170f334012c28" style="width: 100.0%; height: 100.0%;"><b>COL TEC EMPRESARIAL JOSE MARIA</b><br>Porcentaje: 36.89%</div>`)[0];
+                popup_71fa185d747ddbb24eb12dd3a3fba725.setContent(html_4c0ddc4b0e76b1e5587170f334012c28);
+            
+        
+
+        circle_marker_3bc96ecfb2c4c798e8b593b8ce2e8edb.bindPopup(popup_71fa185d747ddbb24eb12dd3a3fba725)
+        ;
+
+        
+    
+    
+            var circle_marker_52d6191694534747b5ef4963291e189d = L.circleMarker(
+                [7.129492699999999, -73.1131681],
+                {"bubblingMouseEvents": true, "color": "#ff7f00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_7b298924bf8de95e38d426b61f35086c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1cdab99009d6e41abc22fd4ac3c935f9 = $(`<div id="html_1cdab99009d6e41abc22fd4ac3c935f9" style="width: 100.0%; height: 100.0%;"><b>UNIVERSIDAD COOP DE COLOMBIA</b><br>Porcentaje: 36.82%</div>`)[0];
+                popup_7b298924bf8de95e38d426b61f35086c.setContent(html_1cdab99009d6e41abc22fd4ac3c935f9);
+            
+        
+
+        circle_marker_52d6191694534747b5ef4963291e189d.bindPopup(popup_7b298924bf8de95e38d426b61f35086c)
+        ;
+
+        
+    
+    
+            var circle_marker_2967d8876f7a2f0c854a1b0752042f80 = L.circleMarker(
+                [7.0739981, -73.0910543],
+                {"bubblingMouseEvents": true, "color": "#ff7f00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_5484f0fb8b223ebaa60d030292e5e64a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_34e77f84540d03f2e08f19885f440edd = $(`<div id="html_34e77f84540d03f2e08f19885f440edd" style="width: 100.0%; height: 100.0%;"><b>IE MEDALLA MILAGROSA</b><br>Porcentaje: 36.78%</div>`)[0];
+                popup_5484f0fb8b223ebaa60d030292e5e64a.setContent(html_34e77f84540d03f2e08f19885f440edd);
+            
+        
+
+        circle_marker_2967d8876f7a2f0c854a1b0752042f80.bindPopup(popup_5484f0fb8b223ebaa60d030292e5e64a)
+        ;
+
+        
+    
+    
+            var circle_marker_60065f054cef3e0d6324db396bb4a3d6 = L.circleMarker(
+                [7.100363, -73.13097280000001],
+                {"bubblingMouseEvents": true, "color": "#ff8000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_fe9465e5b645d0a8cc26f996609e6491 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7cad8ee7286b3a398c0aa4627b1c7c57 = $(`<div id="html_7cad8ee7286b3a398c0aa4627b1c7c57" style="width: 100.0%; height: 100.0%;"><b>IE JOSE CELESTINO MUTIS</b><br>Porcentaje: 36.76%</div>`)[0];
+                popup_fe9465e5b645d0a8cc26f996609e6491.setContent(html_7cad8ee7286b3a398c0aa4627b1c7c57);
+            
+        
+
+        circle_marker_60065f054cef3e0d6324db396bb4a3d6.bindPopup(popup_fe9465e5b645d0a8cc26f996609e6491)
+        ;
+
+        
+    
+    
+            var circle_marker_f26a5755a23ad466a7d442355f2d624b = L.circleMarker(
+                [7.085428299999999, -73.1186434],
+                {"bubblingMouseEvents": true, "color": "#ff8700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_be39f87e7acdbb3d0f413f5c57597305 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_53c0efeff3228dd472385cb828990cb2 = $(`<div id="html_53c0efeff3228dd472385cb828990cb2" style="width: 100.0%; height: 100.0%;"><b>IE INEM CUSTODIO GARCIA ROV SD</b><br>Porcentaje: 35.74%</div>`)[0];
+                popup_be39f87e7acdbb3d0f413f5c57597305.setContent(html_53c0efeff3228dd472385cb828990cb2);
+            
+        
+
+        circle_marker_f26a5755a23ad466a7d442355f2d624b.bindPopup(popup_be39f87e7acdbb3d0f413f5c57597305)
+        ;
+
+        
+    
+    
+            var circle_marker_09d70a0566b7a3373dc804537ab6f6ce = L.circleMarker(
+                [7.119349, -73.1227416],
+                {"bubblingMouseEvents": true, "color": "#ff8700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_d527407ac928bf2367a6392ff5245909 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_20735eeff2a08cd5ee3ff8a2cc63d0ed = $(`<div id="html_20735eeff2a08cd5ee3ff8a2cc63d0ed" style="width: 100.0%; height: 100.0%;"><b>COL FRANCISCANO DEL VIRREY SOL</b><br>Porcentaje: 35.68%</div>`)[0];
+                popup_d527407ac928bf2367a6392ff5245909.setContent(html_20735eeff2a08cd5ee3ff8a2cc63d0ed);
+            
+        
+
+        circle_marker_09d70a0566b7a3373dc804537ab6f6ce.bindPopup(popup_d527407ac928bf2367a6392ff5245909)
+        ;
+
+        
+    
+    
+            var circle_marker_c86b61a8432903eef24b386c8f8c868f = L.circleMarker(
+                [7.1062053, -73.12382649999999],
+                {"bubblingMouseEvents": true, "color": "#ff8800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8800ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_70fceda30f39317b972fdbd8b0e8f4e8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_da37e806c034e324b020b4ab7ed03646 = $(`<div id="html_da37e806c034e324b020b4ab7ed03646" style="width: 100.0%; height: 100.0%;"><b>IE NUESTRA SEÑORA DEL PILAR SE</b><br>Porcentaje: 35.61%</div>`)[0];
+                popup_70fceda30f39317b972fdbd8b0e8f4e8.setContent(html_da37e806c034e324b020b4ab7ed03646);
+            
+        
+
+        circle_marker_c86b61a8432903eef24b386c8f8c868f.bindPopup(popup_70fceda30f39317b972fdbd8b0e8f4e8)
+        ;
+
+        
+    
+    
+            var circle_marker_692ac7915806aaaf431f4aabcc7f5e89 = L.circleMarker(
+                [7.123894099999999, -73.1123794],
+                {"bubblingMouseEvents": true, "color": "#ff8900ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8900ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_8d84b4ab4bc9d64b6f4126a70e0e2fa4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b841a1fd707a20e498a098178c4fe902 = $(`<div id="html_b841a1fd707a20e498a098178c4fe902" style="width: 100.0%; height: 100.0%;"><b>IE LAS AMERICAS</b><br>Porcentaje: 35.45%</div>`)[0];
+                popup_8d84b4ab4bc9d64b6f4126a70e0e2fa4.setContent(html_b841a1fd707a20e498a098178c4fe902);
+            
+        
+
+        circle_marker_692ac7915806aaaf431f4aabcc7f5e89.bindPopup(popup_8d84b4ab4bc9d64b6f4126a70e0e2fa4)
+        ;
+
+        
+    
+    
+            var circle_marker_2e2eab2c745a02848a3695feb8c1ea0d = L.circleMarker(
+                [7.20832, -73.11393],
+                {"bubblingMouseEvents": true, "color": "#ff8900ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8900ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_40938b84c9783ee01edf997bac09f40b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_94b4a32768750e517ea6cda494269189 = $(`<div id="html_94b4a32768750e517ea6cda494269189" style="width: 100.0%; height: 100.0%;"><b>COL SAN PEDRITO</b><br>Porcentaje: 35.35%</div>`)[0];
+                popup_40938b84c9783ee01edf997bac09f40b.setContent(html_94b4a32768750e517ea6cda494269189);
+            
+        
+
+        circle_marker_2e2eab2c745a02848a3695feb8c1ea0d.bindPopup(popup_40938b84c9783ee01edf997bac09f40b)
+        ;
+
+        
+    
+    
+            var circle_marker_c6f5e84e22481e96df799594907cde4a = L.circleMarker(
+                [7.119349, -73.1227416],
+                {"bubblingMouseEvents": true, "color": "#ff8c00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8c00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_18eac1098cbd0eaae1323ca02eb68353 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4c02d2b02434aa250500fa7701a4ac8c = $(`<div id="html_4c02d2b02434aa250500fa7701a4ac8c" style="width: 100.0%; height: 100.0%;"><b>COL JORGE ARDILA DUARTE SEDE A</b><br>Porcentaje: 34.96%</div>`)[0];
+                popup_18eac1098cbd0eaae1323ca02eb68353.setContent(html_4c02d2b02434aa250500fa7701a4ac8c);
+            
+        
+
+        circle_marker_c6f5e84e22481e96df799594907cde4a.bindPopup(popup_18eac1098cbd0eaae1323ca02eb68353)
+        ;
+
+        
+    
+    
+            var circle_marker_7cf2dbee245d08cd38a59df39f253f0d = L.circleMarker(
+                [7.0841499, -73.12273669999999],
+                {"bubblingMouseEvents": true, "color": "#ff8e00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8e00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_9055146f1f88c4fc3f5dc54292a003c0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_793fb5a776eb81189528d68a4f5d049d = $(`<div id="html_793fb5a776eb81189528d68a4f5d049d" style="width: 100.0%; height: 100.0%;"><b>COL ADVENTISTA LIBERTAD</b><br>Porcentaje: 34.75%</div>`)[0];
+                popup_9055146f1f88c4fc3f5dc54292a003c0.setContent(html_793fb5a776eb81189528d68a4f5d049d);
+            
+        
+
+        circle_marker_7cf2dbee245d08cd38a59df39f253f0d.bindPopup(popup_9055146f1f88c4fc3f5dc54292a003c0)
+        ;
+
+        
+    
+    
+            var circle_marker_81b4226318a8b52f2e25a2f2642e1249 = L.circleMarker(
+                [7.1086513, -73.115955],
+                {"bubblingMouseEvents": true, "color": "#ff8e00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff8e00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_02cc96e28be79ecbbac3a50dc179b721 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9dac802c0d26d363714a8a02beab280e = $(`<div id="html_9dac802c0d26d363714a8a02beab280e" style="width: 100.0%; height: 100.0%;"><b>COL AURELIO MARTINEZ MUTIS SED</b><br>Porcentaje: 34.66%</div>`)[0];
+                popup_02cc96e28be79ecbbac3a50dc179b721.setContent(html_9dac802c0d26d363714a8a02beab280e);
+            
+        
+
+        circle_marker_81b4226318a8b52f2e25a2f2642e1249.bindPopup(popup_02cc96e28be79ecbbac3a50dc179b721)
+        ;
+
+        
+    
+    
+            var circle_marker_8bcb07b67e7295e630f837f0bba4317c = L.circleMarker(
+                [7.0934484, -73.1077597],
+                {"bubblingMouseEvents": true, "color": "#ff9100ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff9100ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_c669c1abb5d2ab07b5054eb1bd7d4652 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_365270c14cb143f263f0d894ddacfeb6 = $(`<div id="html_365270c14cb143f263f0d894ddacfeb6" style="width: 100.0%; height: 100.0%;"><b>INST LA LIBERTAD</b><br>Porcentaje: 34.21%</div>`)[0];
+                popup_c669c1abb5d2ab07b5054eb1bd7d4652.setContent(html_365270c14cb143f263f0d894ddacfeb6);
+            
+        
+
+        circle_marker_8bcb07b67e7295e630f837f0bba4317c.bindPopup(popup_c669c1abb5d2ab07b5054eb1bd7d4652)
+        ;
+
+        
+    
+    
+            var circle_marker_1ade7b47145e10fba53cab4dfad7385b = L.circleMarker(
+                [7.1086513, -73.115955],
+                {"bubblingMouseEvents": true, "color": "#ff9200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff9200ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_7c8109327ecaf3e1e0a0d4425f25a5d2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9fe2acdce378e07766be5fc3602ccb1c = $(`<div id="html_9fe2acdce378e07766be5fc3602ccb1c" style="width: 100.0%; height: 100.0%;"><b>COL AURELIO MARTINEZ MUTIS SED</b><br>Porcentaje: 34.19%</div>`)[0];
+                popup_7c8109327ecaf3e1e0a0d4425f25a5d2.setContent(html_9fe2acdce378e07766be5fc3602ccb1c);
+            
+        
+
+        circle_marker_1ade7b47145e10fba53cab4dfad7385b.bindPopup(popup_7c8109327ecaf3e1e0a0d4425f25a5d2)
+        ;
+
+        
+    
+    
+            var circle_marker_83e712c3913f06832bc8c04c26d5158d = L.circleMarker(
+                [7.148932299999999, -73.1351602],
+                {"bubblingMouseEvents": true, "color": "#ff9200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff9200ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_5f81504efd6e036d59d579dd244c1202 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4cb3a4df97908daf6f513416d14d028a = $(`<div id="html_4cb3a4df97908daf6f513416d14d028a" style="width: 100.0%; height: 100.0%;"><b>IE TEC RAFAEL GARCIA HERREROS</b><br>Porcentaje: 34.06%</div>`)[0];
+                popup_5f81504efd6e036d59d579dd244c1202.setContent(html_4cb3a4df97908daf6f513416d14d028a);
+            
+        
+
+        circle_marker_83e712c3913f06832bc8c04c26d5158d.bindPopup(popup_5f81504efd6e036d59d579dd244c1202)
+        ;
+
+        
+    
+    
+            var circle_marker_ac9032df42db99171dc07c6fdb6ac5a5 = L.circleMarker(
+                [7.131338899999999, -73.1031694],
+                {"bubblingMouseEvents": true, "color": "#ff9300ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff9300ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_9f1ea4ef07ed7ca4b1979664c488987c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_eb6567dae249f2e1caa683fd38088700 = $(`<div id="html_eb6567dae249f2e1caa683fd38088700" style="width: 100.0%; height: 100.0%;"><b>IE ORIENTE MIRAFLORES SEDE C</b><br>Porcentaje: 34.01%</div>`)[0];
+                popup_9f1ea4ef07ed7ca4b1979664c488987c.setContent(html_eb6567dae249f2e1caa683fd38088700);
+            
+        
+
+        circle_marker_ac9032df42db99171dc07c6fdb6ac5a5.bindPopup(popup_9f1ea4ef07ed7ca4b1979664c488987c)
+        ;
+
+        
+    
+    
+            var circle_marker_04129c0fe21906bca47c1a3e5a14d7fa = L.circleMarker(
+                [7.119349, -73.1227416],
+                {"bubblingMouseEvents": true, "color": "#ff9500ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff9500ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_a3be49aa7713b23c83a64d1091a49240 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5ad399f27d95d173f98043bc903613a1 = $(`<div id="html_5ad399f27d95d173f98043bc903613a1" style="width: 100.0%; height: 100.0%;"><b>INST INTEGD JORGE ELIECER GAIT</b><br>Porcentaje: 33.71%</div>`)[0];
+                popup_a3be49aa7713b23c83a64d1091a49240.setContent(html_5ad399f27d95d173f98043bc903613a1);
+            
+        
+
+        circle_marker_04129c0fe21906bca47c1a3e5a14d7fa.bindPopup(popup_a3be49aa7713b23c83a64d1091a49240)
+        ;
+
+        
+    
+    
+            var circle_marker_ba6545a06222b35eb1982285be5ee2b8 = L.circleMarker(
+                [7.119349, -73.1227416],
+                {"bubblingMouseEvents": true, "color": "#ff9700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff9700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_6eb9ce1225c2a18a9bce6b7e104f8c2c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7b67790d675a830d12ef3b88061530bc = $(`<div id="html_7b67790d675a830d12ef3b88061530bc" style="width: 100.0%; height: 100.0%;"><b>ESC NORMAL SUPERIOR SEDE A</b><br>Porcentaje: 33.44%</div>`)[0];
+                popup_6eb9ce1225c2a18a9bce6b7e104f8c2c.setContent(html_7b67790d675a830d12ef3b88061530bc);
+            
+        
+
+        circle_marker_ba6545a06222b35eb1982285be5ee2b8.bindPopup(popup_6eb9ce1225c2a18a9bce6b7e104f8c2c)
+        ;
+
+        
+    
+    
+            var circle_marker_304acbc4379be0f27d06eb8eef4a208a = L.circleMarker(
+                [7.1128947, -73.137012],
+                {"bubblingMouseEvents": true, "color": "#ff9900ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff9900ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_cca779aec82bed9d9863405c7bb13f1f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_86642800cb809b77b0dd6f65028f779d = $(`<div id="html_86642800cb809b77b0dd6f65028f779d" style="width: 100.0%; height: 100.0%;"><b>IE ANDRES PAEZ DE SOTOMAYOR</b><br>Porcentaje: 33.12%</div>`)[0];
+                popup_cca779aec82bed9d9863405c7bb13f1f.setContent(html_86642800cb809b77b0dd6f65028f779d);
+            
+        
+
+        circle_marker_304acbc4379be0f27d06eb8eef4a208a.bindPopup(popup_cca779aec82bed9d9863405c7bb13f1f)
+        ;
+
+        
+    
+    
+            var circle_marker_222893a46c8efa6818e2aa3b5ad6f33e = L.circleMarker(
+                [7.097747399999999, -73.1100045],
+                {"bubblingMouseEvents": true, "color": "#ff9b00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff9b00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_c44a4ed8e75ffd6576edca80be2a41b8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_73bb3663abce391b7e2901e7c6fb983c = $(`<div id="html_73bb3663abce391b7e2901e7c6fb983c" style="width: 100.0%; height: 100.0%;"><b>COL INEM SEDE G</b><br>Porcentaje: 32.81%</div>`)[0];
+                popup_c44a4ed8e75ffd6576edca80be2a41b8.setContent(html_73bb3663abce391b7e2901e7c6fb983c);
+            
+        
+
+        circle_marker_222893a46c8efa6818e2aa3b5ad6f33e.bindPopup(popup_c44a4ed8e75ffd6576edca80be2a41b8)
+        ;
+
+        
+    
+    
+            var circle_marker_271e894032edf69c5523cb4fbe2747e9 = L.circleMarker(
+                [7.093233000000001, -73.1422931],
+                {"bubblingMouseEvents": true, "color": "#ff9c00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff9c00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_154609aa806b8c27eda8a9e6731480c2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b9352664344c2da748289a2282299e02 = $(`<div id="html_b9352664344c2da748289a2282299e02" style="width: 100.0%; height: 100.0%;"><b>IE LUIS CARLOS GALAN SARMIENTO</b><br>Porcentaje: 32.70%</div>`)[0];
+                popup_154609aa806b8c27eda8a9e6731480c2.setContent(html_b9352664344c2da748289a2282299e02);
+            
+        
+
+        circle_marker_271e894032edf69c5523cb4fbe2747e9.bindPopup(popup_154609aa806b8c27eda8a9e6731480c2)
+        ;
+
+        
+    
+    
+            var circle_marker_0b407b588f0348efd54f1a9efab65a75 = L.circleMarker(
+                [7.1076371, -73.1363556],
+                {"bubblingMouseEvents": true, "color": "#ffa400ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffa400ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_0b5b87730b774881a7d291acac69d8cd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_55100c55ad7a91b172a6c5db576f2dff = $(`<div id="html_55100c55ad7a91b172a6c5db576f2dff" style="width: 100.0%; height: 100.0%;"><b>COL COOPERATIVO DE BUCARAMANGA</b><br>Porcentaje: 31.49%</div>`)[0];
+                popup_0b5b87730b774881a7d291acac69d8cd.setContent(html_55100c55ad7a91b172a6c5db576f2dff);
+            
+        
+
+        circle_marker_0b407b588f0348efd54f1a9efab65a75.bindPopup(popup_0b5b87730b774881a7d291acac69d8cd)
+        ;
+
+        
+    
+    
+            var circle_marker_0240b8b37e59aac07cedf774497a2811 = L.circleMarker(
+                [7.1263748, -73.1193627],
+                {"bubblingMouseEvents": true, "color": "#ffa700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffa700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_072d34786d1fba6094e6990a9fe7a7df = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4733ef0e10426212176f2ca77c9d6b5d = $(`<div id="html_4733ef0e10426212176f2ca77c9d6b5d" style="width: 100.0%; height: 100.0%;"><b>COL NUESTRA SEÑORA DE FÀTIMA</b><br>Porcentaje: 31.00%</div>`)[0];
+                popup_072d34786d1fba6094e6990a9fe7a7df.setContent(html_4733ef0e10426212176f2ca77c9d6b5d);
+            
+        
+
+        circle_marker_0240b8b37e59aac07cedf774497a2811.bindPopup(popup_072d34786d1fba6094e6990a9fe7a7df)
+        ;
+
+        
+    
+    
+            var circle_marker_e79cc7e77f1d8621883aeae8fdbb21e7 = L.circleMarker(
+                [7.1514894, -73.13253329999999],
+                {"bubblingMouseEvents": true, "color": "#ffa700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffa700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_80ce5e0854437f9a11b06de4064366eb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_390faa6c11282f54b925eac44ecebff6 = $(`<div id="html_390faa6c11282f54b925eac44ecebff6" style="width: 100.0%; height: 100.0%;"><b>CTRAL DE ABASTOS</b><br>Porcentaje: 30.97%</div>`)[0];
+                popup_80ce5e0854437f9a11b06de4064366eb.setContent(html_390faa6c11282f54b925eac44ecebff6);
+            
+        
+
+        circle_marker_e79cc7e77f1d8621883aeae8fdbb21e7.bindPopup(popup_80ce5e0854437f9a11b06de4064366eb)
+        ;
+
+        
+    
+    
+            var circle_marker_a28f0f5274b26001911cbb52fb288b83 = L.circleMarker(
+                [7.117411499999999, -73.1133277],
+                {"bubblingMouseEvents": true, "color": "#ffa700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffa700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_f4e2f97b22a0e46c662e04d41aae7cec = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f8560b3c7d0914ac0f0632328237b971 = $(`<div id="html_f8560b3c7d0914ac0f0632328237b971" style="width: 100.0%; height: 100.0%;"><b>COL SAN PEDRO CLAVER</b><br>Porcentaje: 30.83%</div>`)[0];
+                popup_f4e2f97b22a0e46c662e04d41aae7cec.setContent(html_f8560b3c7d0914ac0f0632328237b971);
+            
+        
+
+        circle_marker_a28f0f5274b26001911cbb52fb288b83.bindPopup(popup_f4e2f97b22a0e46c662e04d41aae7cec)
+        ;
+
+        
+    
+    
+            var circle_marker_69f26a3519fe28bd6019de78eb606484 = L.circleMarker(
+                [7.085428299999999, -73.1186434],
+                {"bubblingMouseEvents": true, "color": "#ffa800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffa800ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_4ebd47e3fafa9bbcc9f8a0068392ac52 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9658258e3c7dedd02056807c2b5ccf38 = $(`<div id="html_9658258e3c7dedd02056807c2b5ccf38" style="width: 100.0%; height: 100.0%;"><b>IE INEM CUSTODIO GARCIA ROV SD</b><br>Porcentaje: 30.59%</div>`)[0];
+                popup_4ebd47e3fafa9bbcc9f8a0068392ac52.setContent(html_9658258e3c7dedd02056807c2b5ccf38);
+            
+        
+
+        circle_marker_69f26a3519fe28bd6019de78eb606484.bindPopup(popup_4ebd47e3fafa9bbcc9f8a0068392ac52)
+        ;
+
+        
+    
+    
+            var circle_marker_1eb09908c6629a1bf8698b69935f52a2 = L.circleMarker(
+                [7.1360484, -73.1287518],
+                {"bubblingMouseEvents": true, "color": "#ffa900ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffa900ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_c430601b03207be7794cd8afd994245a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0934a80b5bb6cf57808e825eb6768e51 = $(`<div id="html_0934a80b5bb6cf57808e825eb6768e51" style="width: 100.0%; height: 100.0%;"><b>IE COMUNEROS</b><br>Porcentaje: 30.34%</div>`)[0];
+                popup_c430601b03207be7794cd8afd994245a.setContent(html_0934a80b5bb6cf57808e825eb6768e51);
+            
+        
+
+        circle_marker_1eb09908c6629a1bf8698b69935f52a2.bindPopup(popup_c430601b03207be7794cd8afd994245a)
+        ;
+
+        
+    
+    
+            var circle_marker_f0356b37550e9cd4f68ec374941d4704 = L.circleMarker(
+                [7.0739981, -73.0910543],
+                {"bubblingMouseEvents": true, "color": "#ffab00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffab00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_3cb9ae4792da0ed4df677acb418e464c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d7e36eca49f62aed1e551afe99c92f2d = $(`<div id="html_d7e36eca49f62aed1e551afe99c92f2d" style="width: 100.0%; height: 100.0%;"><b>IE RURAL BOSCONIA</b><br>Porcentaje: 29.79%</div>`)[0];
+                popup_3cb9ae4792da0ed4df677acb418e464c.setContent(html_d7e36eca49f62aed1e551afe99c92f2d);
+            
+        
+
+        circle_marker_f0356b37550e9cd4f68ec374941d4704.bindPopup(popup_3cb9ae4792da0ed4df677acb418e464c)
+        ;
+
+        
+    
+    
+            var circle_marker_8941144b7ffba29a65eb9ab1b1657905 = L.circleMarker(
+                [7.1215563, -73.1307011],
+                {"bubblingMouseEvents": true, "color": "#ffac00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffac00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_1940288bdcec5ba4442a43aba3956bbb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bdfd51502b95c43d996d8ff208211790 = $(`<div id="html_bdfd51502b95c43d996d8ff208211790" style="width: 100.0%; height: 100.0%;"><b>INST TEC SALESIANO ELOY VALENZ</b><br>Porcentaje: 29.67%</div>`)[0];
+                popup_1940288bdcec5ba4442a43aba3956bbb.setContent(html_bdfd51502b95c43d996d8ff208211790);
+            
+        
+
+        circle_marker_8941144b7ffba29a65eb9ab1b1657905.bindPopup(popup_1940288bdcec5ba4442a43aba3956bbb)
+        ;
+
+        
+    
+    
+            var circle_marker_155dca764beb1c59c4d58efc536204cf = L.circleMarker(
+                [7.1167105, -73.12873929999999],
+                {"bubblingMouseEvents": true, "color": "#ffac00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffac00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_ffb166d1791e44eb9f421601b153aacb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_36d21b36a2d0e416217b223b5e284605 = $(`<div id="html_36d21b36a2d0e416217b223b5e284605" style="width: 100.0%; height: 100.0%;"><b>CORP UNIVERSITARIA UNICIENCIA</b><br>Porcentaje: 29.48%</div>`)[0];
+                popup_ffb166d1791e44eb9f421601b153aacb.setContent(html_36d21b36a2d0e416217b223b5e284605);
+            
+        
+
+        circle_marker_155dca764beb1c59c4d58efc536204cf.bindPopup(popup_ffb166d1791e44eb9f421601b153aacb)
+        ;
+
+        
+    
+    
+            var circle_marker_3ef24a7dad87085837d9c653fb0ad3d6 = L.circleMarker(
+                [7.119349, -73.1227416],
+                {"bubblingMouseEvents": true, "color": "#ffb200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb200ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_0079c6fc246b6bb4b27d17998e99948f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_22e6e7e4834191a5ffd815fc562e591e = $(`<div id="html_22e6e7e4834191a5ffd815fc562e591e" style="width: 100.0%; height: 100.0%;"><b>ORDEN DE LOS CLÉRIGOS REG SOMA</b><br>Porcentaje: 28.01%</div>`)[0];
+                popup_0079c6fc246b6bb4b27d17998e99948f.setContent(html_22e6e7e4834191a5ffd815fc562e591e);
+            
+        
+
+        circle_marker_3ef24a7dad87085837d9c653fb0ad3d6.bindPopup(popup_0079c6fc246b6bb4b27d17998e99948f)
+        ;
+
+        
+    
+    
+            var circle_marker_0af71b066726c23f37210ee49ee50277 = L.circleMarker(
+                [7.1522305, -73.1353991],
+                {"bubblingMouseEvents": true, "color": "#ffb600ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb600ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_1cc526f6532b8e5802ad81daa390b898 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_068556d4d2ecd8cb0169017ad1ce2c01 = $(`<div id="html_068556d4d2ecd8cb0169017ad1ce2c01" style="width: 100.0%; height: 100.0%;"><b>IE MAIPORÉ SEDE B</b><br>Porcentaje: 27.01%</div>`)[0];
+                popup_1cc526f6532b8e5802ad81daa390b898.setContent(html_068556d4d2ecd8cb0169017ad1ce2c01);
+            
+        
+
+        circle_marker_0af71b066726c23f37210ee49ee50277.bindPopup(popup_1cc526f6532b8e5802ad81daa390b898)
+        ;
+
+        
+    
+    
+            var circle_marker_6a47ae96b62377e9a40dfdbc49cf87b6 = L.circleMarker(
+                [7.1402291, -73.11560910000001],
+                {"bubblingMouseEvents": true, "color": "#ffb700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_1bbc4c710dece04009b2a88d10fdaa62 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_62e6bca3a0d4922ba5888b3e5aa70fc1 = $(`<div id="html_62e6bca3a0d4922ba5888b3e5aa70fc1" style="width: 100.0%; height: 100.0%;"><b>IE ORIENTE MIRAFLORES SEDE A</b><br>Porcentaje: 26.84%</div>`)[0];
+                popup_1bbc4c710dece04009b2a88d10fdaa62.setContent(html_62e6bca3a0d4922ba5888b3e5aa70fc1);
+            
+        
+
+        circle_marker_6a47ae96b62377e9a40dfdbc49cf87b6.bindPopup(popup_1bbc4c710dece04009b2a88d10fdaa62)
+        ;
+
+        
+    
+    
+            var circle_marker_857ba4ee45a107297128e4a7af31fa31 = L.circleMarker(
+                [7.180609299999999, -73.142692],
+                {"bubblingMouseEvents": true, "color": "#ffb900ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffb900ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_e2f9dc00d59eda92fe6f9115e5c2ceee = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5074a4055c3b6a95093db4b6f144f7de = $(`<div id="html_5074a4055c3b6a95093db4b6f144f7de" style="width: 100.0%; height: 100.0%;"><b>SALON COMUNAL  EL PABLON</b><br>Porcentaje: 26.32%</div>`)[0];
+                popup_e2f9dc00d59eda92fe6f9115e5c2ceee.setContent(html_5074a4055c3b6a95093db4b6f144f7de);
+            
+        
+
+        circle_marker_857ba4ee45a107297128e4a7af31fa31.bindPopup(popup_e2f9dc00d59eda92fe6f9115e5c2ceee)
+        ;
+
+        
+    
+    
+            var circle_marker_34a611d17ae91092555b6cd4d4c2e9e7 = L.circleMarker(
+                [7.149987299999999, -73.1320101],
+                {"bubblingMouseEvents": true, "color": "#ffbc00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffbc00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_ef1e8d152700acf19699fae4c2bef7e7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f6d24c4dc63cb476a505255ddff6a847 = $(`<div id="html_f6d24c4dc63cb476a505255ddff6a847" style="width: 100.0%; height: 100.0%;"><b>INST DE PROM SOC DEL NORTE SED</b><br>Porcentaje: 25.50%</div>`)[0];
+                popup_ef1e8d152700acf19699fae4c2bef7e7.setContent(html_f6d24c4dc63cb476a505255ddff6a847);
+            
+        
+
+        circle_marker_34a611d17ae91092555b6cd4d4c2e9e7.bindPopup(popup_ef1e8d152700acf19699fae4c2bef7e7)
+        ;
+
+        
+    
+    
+            var circle_marker_7af0b65763c146b07118a585fac3d4c4 = L.circleMarker(
+                [7.116154499999999, -73.1298978],
+                {"bubblingMouseEvents": true, "color": "#ffbe00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffbe00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_3b0156921c68c0322ca4d68f515159ea = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2bf2f4b46ae6db1fadeadddd30448d5f = $(`<div id="html_2bf2f4b46ae6db1fadeadddd30448d5f" style="width: 100.0%; height: 100.0%;"><b>GOBERNACION DE SANTANDER</b><br>Porcentaje: 24.93%</div>`)[0];
+                popup_3b0156921c68c0322ca4d68f515159ea.setContent(html_2bf2f4b46ae6db1fadeadddd30448d5f);
+            
+        
+
+        circle_marker_7af0b65763c146b07118a585fac3d4c4.bindPopup(popup_3b0156921c68c0322ca4d68f515159ea)
+        ;
+
+        
+    
+    
+            var circle_marker_d1c20a0c5eb5e8c58a637354fa4ca499 = L.circleMarker(
+                [7.1091403, -73.11457659999999],
+                {"bubblingMouseEvents": true, "color": "#ffc300ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffc300ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_e9ed666030c70f7dbb7a8b5cf4418b0f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_437cc6bc6bf30afdf209f1307e952195 = $(`<div id="html_437cc6bc6bf30afdf209f1307e952195" style="width: 100.0%; height: 100.0%;"><b>IE LOS COLORADOS</b><br>Porcentaje: 23.47%</div>`)[0];
+                popup_e9ed666030c70f7dbb7a8b5cf4418b0f.setContent(html_437cc6bc6bf30afdf209f1307e952195);
+            
+        
+
+        circle_marker_d1c20a0c5eb5e8c58a637354fa4ca499.bindPopup(popup_e9ed666030c70f7dbb7a8b5cf4418b0f)
+        ;
+
+        
+    
+    
+            var circle_marker_cdc8758935a680ae9475490ecaaa01e0 = L.circleMarker(
+                [7.119349, -73.1227416],
+                {"bubblingMouseEvents": true, "color": "#ffc400ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffc400ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_9e25db2fa40381f59b217ee129244e00 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fbfa8cc2611924a60e5d9c60830d5835 = $(`<div id="html_fbfa8cc2611924a60e5d9c60830d5835" style="width: 100.0%; height: 100.0%;"><b>SAN JOSE</b><br>Porcentaje: 23.23%</div>`)[0];
+                popup_9e25db2fa40381f59b217ee129244e00.setContent(html_fbfa8cc2611924a60e5d9c60830d5835);
+            
+        
+
+        circle_marker_cdc8758935a680ae9475490ecaaa01e0.bindPopup(popup_9e25db2fa40381f59b217ee129244e00)
+        ;
+
+        
+    
+    
+            var circle_marker_d0ebb34514c284e2b774e0ad1e9ef7f4 = L.circleMarker(
+                [7.153245, -73.1267684],
+                {"bubblingMouseEvents": true, "color": "#ffc700ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffc700ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_17c0cc047a55c52c21448ec79d6b0bb2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_823fca5ac63523a734402f81a602d487 = $(`<div id="html_823fca5ac63523a734402f81a602d487" style="width: 100.0%; height: 100.0%;"><b>IE DÁMASO ZAPATA SEDE C</b><br>Porcentaje: 22.63%</div>`)[0];
+                popup_17c0cc047a55c52c21448ec79d6b0bb2.setContent(html_823fca5ac63523a734402f81a602d487);
+            
+        
+
+        circle_marker_d0ebb34514c284e2b774e0ad1e9ef7f4.bindPopup(popup_17c0cc047a55c52c21448ec79d6b0bb2)
+        ;
+
+        
+    
+    
+            var circle_marker_497a0a054e959626eca14435f3ee72c2 = L.circleMarker(
+                [7.1530833, -73.1337914],
+                {"bubblingMouseEvents": true, "color": "#ffcf00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffcf00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_c873f54c53158e0995d62e9bcc0e0e56 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_56c33ed4419c60a976d371360b3e9f74 = $(`<div id="html_56c33ed4419c60a976d371360b3e9f74" style="width: 100.0%; height: 100.0%;"><b>IE CAFÉ MADRID</b><br>Porcentaje: 20.38%</div>`)[0];
+                popup_c873f54c53158e0995d62e9bcc0e0e56.setContent(html_56c33ed4419c60a976d371360b3e9f74);
+            
+        
+
+        circle_marker_497a0a054e959626eca14435f3ee72c2.bindPopup(popup_c873f54c53158e0995d62e9bcc0e0e56)
+        ;
+
+        
+    
+    
+            var circle_marker_08acc70d5bbe58c1483ff0eaa7aa475f = L.circleMarker(
+                [7.180609299999999, -73.142692],
+                {"bubblingMouseEvents": true, "color": "#ffda00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffda00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_c61d7955791441fff34965b3239cf857 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6bc53a3c02511686f684a3866badb5f1 = $(`<div id="html_6bc53a3c02511686f684a3866badb5f1" style="width: 100.0%; height: 100.0%;"><b>EL PABLON</b><br>Porcentaje: 17.67%</div>`)[0];
+                popup_c61d7955791441fff34965b3239cf857.setContent(html_6bc53a3c02511686f684a3866badb5f1);
+            
+        
+
+        circle_marker_08acc70d5bbe58c1483ff0eaa7aa475f.bindPopup(popup_c61d7955791441fff34965b3239cf857)
+        ;
+
+        
+    
+    
+            var circle_marker_946f6f156ec044be7898be8302b366a4 = L.circleMarker(
+                [7.096570499999999, -73.0975857],
+                {"bubblingMouseEvents": true, "color": "#ffeb00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffeb00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_ac246ae7936ccd2fe715dd04b7a99274 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d82df4e1180f2bc9d0651b5eeb6be3a1 = $(`<div id="html_d82df4e1180f2bc9d0651b5eeb6be3a1" style="width: 100.0%; height: 100.0%;"><b>VIJAGUAL</b><br>Porcentaje: 13.11%</div>`)[0];
+                popup_ac246ae7936ccd2fe715dd04b7a99274.setContent(html_d82df4e1180f2bc9d0651b5eeb6be3a1);
+            
+        
+
+        circle_marker_946f6f156ec044be7898be8302b366a4.bindPopup(popup_ac246ae7936ccd2fe715dd04b7a99274)
+        ;
+
+        
+    
+    
+            var circle_marker_527d50983cc237cf08e8c6af0c709748 = L.circleMarker(
+                [7.1224466, -73.12433829999999],
+                {"bubblingMouseEvents": true, "color": "#ffee00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffee00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_08c88c97caead74c43cf7935a44ec29a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7377c696c566dd893e8083248cac699a = $(`<div id="html_7377c696c566dd893e8083248cac699a" style="width: 100.0%; height: 100.0%;"><b>LA CAPILLA</b><br>Porcentaje: 12.45%</div>`)[0];
+                popup_08c88c97caead74c43cf7935a44ec29a.setContent(html_7377c696c566dd893e8083248cac699a);
+            
+        
+
+        circle_marker_527d50983cc237cf08e8c6af0c709748.bindPopup(popup_08c88c97caead74c43cf7935a44ec29a)
+        ;
+
+        
+    
+    
+            var circle_marker_7b1ba5a6c6f0d6bb01f70c327c666734 = L.circleMarker(
+                [7.120962199999999, -73.12512269999999],
+                {"bubblingMouseEvents": true, "color": "#ffff00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffff00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_d9fa26a98f863d8402aa22a0c45c88d7);
+        
+    
+        var popup_ac73e058184c91c03c41a554f6931a8e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_23ad86705a2a724e5968f4dde15589ab = $(`<div id="html_23ad86705a2a724e5968f4dde15589ab" style="width: 100.0%; height: 100.0%;"><b>MONSERRATE</b><br>Porcentaje: 7.74%</div>`)[0];
+                popup_ac73e058184c91c03c41a554f6931a8e.setContent(html_23ad86705a2a724e5968f4dde15589ab);
+            
+        
+
+        circle_marker_7b1ba5a6c6f0d6bb01f70c327c666734.bindPopup(popup_ac73e058184c91c03c41a554f6931a8e)
+        ;
+
+        
+    
+</script>
+</html>
